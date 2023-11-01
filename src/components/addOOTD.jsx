@@ -1,53 +1,21 @@
 import React, { useState } from "react";
 import * as Popover from "@radix-ui/react-popover";
-import {
-  PlusIcon,
-  MagnifyingGlassIcon,
-  Cross2Icon,
-} from "@radix-ui/react-icons";
+import { PlusIcon, Link1Icon, Cross2Icon } from "@radix-ui/react-icons";
 import "../index.css";
-import {
-  Theme,
-  Flex,
-  TextField,
-  Card,
-  Inset,
-  Strong,
-  Text,
-  Button,
-} from "@radix-ui/themes";
-import AddIcon from "@mui/icons-material/Add";
-import Fab from "@mui/material/Fab";
-import Zoom from "@mui/material/Zoom";
+import { Flex, TextField, Button } from "@radix-ui/themes";
 
 function AddOOTD(props) {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [note, setNote] = useState({
+    date: "",
+    content: "",
+    image: null, //add image property to the note
+  });
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setSelectedImage(file);
   };
-
-  const onSubmitForm = (FormData) => {
-    const formData = new FormData();
-    formData.append("email", formData.email);
-    formData.append("question", formData.question);
-    formData.append("image", selectedImage);
-
-    // Your custom function with additional information
-    // You can pass formData and any other data you need
-    customSubmitFunction(formData);
-  };
-
-  const customSubmitFunction = (FormData, additionalInfo) => {
-    // Perform your custom actions with the formData and additionalInfo
-    // This can include making API requests, handling the form data, etc.
-  };
-
-  const [note, setNote] = useState({
-    title: "",
-    content: "",
-  });
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -63,10 +31,20 @@ function AddOOTD(props) {
   function submitNote(event) {
     props.onAdd(note);
     setNote({
-      title: "",
+      date: "",
       content: "",
+      image: selectedImage, //reset the image property
     });
-    event.preventDefault();
+    //event.preventDefault();
+    setSelectedImage(null); // Reset the selectedImage
+  }
+
+  function getCurrentDate() {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Month is 0-based
+    const day = String(currentDate.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
   }
 
   return (
@@ -78,29 +56,24 @@ function AddOOTD(props) {
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content className="PopoverContent" sideOffset={5}>
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p className="Text" style={{ marginBottom: 10 }}>
               add fit of the day
             </p>
 
-            <TextField.Input
-              name="title"
-              onChange={handleChange}
-              value={note.title}
-              placeholder="today's date"
-              type="date"
-            />
-
-            <TextField.Input
-              name="content"
-              onChange={handleChange}
-              value={note.content}
-              placeholder="fit description"
-            />
-
-            <Fab onClick={submitNote}>
-              <AddIcon />
-            </Fab>
+            <button className="Button violet">
+              <label htmlFor="imageUpload" className="ImageUploadLabel">
+                {selectedImage ? "uploaded" : "upload fit"}
+              </label>
+              <input
+                type="file"
+                id="imageUpload"
+                name="image"
+                accept="image/*"
+                onChange={handleImageChange}
+                style={{ display: "none" }}
+              />
+            </button>
 
             <fieldset className="Fieldset">
               <label className="Label" htmlFor="width">
@@ -108,35 +81,33 @@ function AddOOTD(props) {
               </label>
               <input
                 className="Input"
-                id="date"
+                name="date"
+                onChange={handleChange}
+                value={note.date}
+                defaultValue={getCurrentDate()}
                 type="date"
-                defaultValue="100%"
               />
             </fieldset>
             <fieldset className="Fieldset">
-              <label className="Label" htmlFor="description">
-                fit description
-              </label>
+              <label className="Label">fit description</label>
               <input
+                name="content"
                 className="Input"
-                id="description"
-                defaultValue="off shoulder short sleeve"
-              />
-            </fieldset>
-            <fieldset className="Fieldset">
-              <label className="Label" htmlFor="weather">
-                weather
-              </label>
-              <input
-                className="Input"
-                id="weather"
-                defaultValue="80 degrees, warm, sunny"
+                onChange={handleChange}
+                value={note.content}
+                placeholder="off shoulder short sleeve"
               />
             </fieldset>
 
-            <Button radius="full" variant="soft">
-              Edit profile
-            </Button>
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <button
+                className="IconButton"
+                onClick={submitNote}
+                aria-label="Update dimensions"
+              >
+                <PlusIcon />
+              </button>
+            </div>
           </div>
           <Popover.Close className="PopoverClose" aria-label="Close">
             <Cross2Icon />

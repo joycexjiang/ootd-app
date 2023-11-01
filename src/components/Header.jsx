@@ -4,7 +4,7 @@ import React from "react";
 function Header() {
   return (
     <header>
-      <h1>Keeper App</h1>
+      <h1>outfit of the day app</h1>
     </header>
   );
 }
