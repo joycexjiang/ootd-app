@@ -3,7 +3,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Note from "./components/Note";
 import '@radix-ui/themes/styles.css';
-import { Theme, Flex, Grid } from '@radix-ui/themes';
+import { Theme} from '@radix-ui/themes';
 import AddOOTD from "./components/addOOTD";
 
 
@@ -31,8 +31,8 @@ function App() {
 
       <Header />
       <AddOOTD onAdd={addNote}/>
-      <Grid columns="5" gap="0.1" width="100">
-
+      {/* <Grid columns="5" gap="0.1" width="100"> */}
+<div class ="note-grid">
       {notes.map((noteItem, index) => {
         return (
           
@@ -48,7 +48,7 @@ function App() {
         );
       })}
 
-    </Grid>
+</div>
       
       </Theme>
       <Footer />

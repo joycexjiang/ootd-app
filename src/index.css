@@ -202,4 +202,15 @@ input {
   }
 }
 
+.note-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15%, 1fr)); /* Adjust the percentage as needed */
+  gap: 10px; /* Adjust the gap between items as needed */
+}
 
+/* Add a media query to adjust the number of columns based on screen size */
+@media (max-width: 768px) {
+  .note-grid {
+    grid-template-columns: repeat(auto-fill, minmax(15%, 1fr)); /* Adjust for smaller screens */
+  }
+}

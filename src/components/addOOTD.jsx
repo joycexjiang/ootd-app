@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import * as Popover from "@radix-ui/react-popover";
-import { PlusIcon, Link1Icon, Cross2Icon } from "@radix-ui/react-icons";
+import { PlusIcon, Cross2Icon } from "@radix-ui/react-icons";
 import "../index.css";
-import { Flex, TextField, Button } from "@radix-ui/themes";
 
 function AddOOTD(props) {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -13,7 +12,7 @@ function AddOOTD(props) {
   });
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
+    const file = URL.createObjectURL(e.target.files[0]);
     setSelectedImage(file);
   };
 
