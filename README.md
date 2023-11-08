@@ -1,9 +1,10 @@
 # Outfit of the Day App
-
 Midterm for Full Web Stack Development COMS W3102
 
-## Functionality
+### Functionality
+Add an outfit of the day entry with the date that you wore the outfit. Add a description to describe the outfit worn.
 
+### Midterm Rubric
 Requirement: Create a React app that has the basic functionality of Google Keep.
 
 1. Implement the add note functionality.
