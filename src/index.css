@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  padding: 40px 40px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -204,13 +204,14 @@ input {
 
 .note-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15%, 1fr)); /* Adjust the percentage as needed */
-  gap: 10px; /* Adjust the gap between items as needed */
+  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr)); /* Adjust the percentage as needed */
+  gap: 20px; /* Adjust the gap between items as needed */
+  padding: 20px;
 }
 
 /* Add a media query to adjust the number of columns based on screen size */
 @media (max-width: 768px) {
   .note-grid {
-    grid-template-columns: repeat(auto-fill, minmax(15%, 1fr)); /* Adjust for smaller screens */
+    grid-template-columns: repeat(auto-fill, minmax(18%, 1fr)); /* Adjust for smaller screens */
   }
 }

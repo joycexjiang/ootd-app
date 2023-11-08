@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import * as Popover from "@radix-ui/react-popover";
-import { PlusIcon, Cross2Icon } from "@radix-ui/react-icons";
+import { PlusIcon, Cross2Icon, CaretDownIcon } from "@radix-ui/react-icons";
 import "../index.css";
+import { Theme, DropdownMenu, Button } from "@radix-ui/themes";
 
 function AddOOTD(props) {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -28,33 +29,28 @@ function AddOOTD(props) {
   }
 
   function submitNote(event) {
-    props.onAdd(note);
+    props.onAdd({
+      date: note.date,
+      content: note.content,
+      image: selectedImage, // set the image from selectedImage
+    });
     setNote({
       date: "",
       content: "",
-      image: selectedImage, //reset the image property
+      image: null, // reset the image property
     });
-    //event.preventDefault();
-    setSelectedImage(null); // Reset the selectedImage
-  }
-
-  function getCurrentDate() {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Month is 0-based
-    const day = String(currentDate.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
+    setSelectedImage(null);
   }
 
   return (
     <Popover.Root>
       <Popover.Trigger asChild>
-        <button className="IconButton" aria-label="Update dimensions">
+        <button className="IconButton">
           <PlusIcon />
         </button>
       </Popover.Trigger>
       <Popover.Portal>
-        <Popover.Content className="PopoverContent" sideOffset={5}>
+        <Popover.Content className="PopoverContent" sideOffset={10}>
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
             <p className="Text" style={{ marginBottom: 10 }}>
               add fit of the day
@@ -83,7 +79,6 @@ function AddOOTD(props) {
                 name="date"
                 onChange={handleChange}
                 value={note.date}
-                defaultValue={getCurrentDate()}
                 type="date"
               />
             </fieldset>
@@ -94,7 +89,7 @@ function AddOOTD(props) {
                 className="Input"
                 onChange={handleChange}
                 value={note.content}
-                placeholder="off shoulder short sleeve"
+                placeholder="description"
               />
             </fieldset>
 

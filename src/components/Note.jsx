@@ -1,6 +1,6 @@
 import React from "react";
 import { TrashIcon } from "@radix-ui/react-icons";
-import { Card, Inset, Strong, Text, Badge, Flex } from "@radix-ui/themes";
+import { Card, Inset, Strong, Text, Flex } from "@radix-ui/themes";
 
 function Note(props) {
   function handleClick() {
@@ -8,7 +8,7 @@ function Note(props) {
   }
 
   return (
-    <Card size="2" style={{ maxWidth: 270 }}>
+    <Card size="3" style={{ maxWidth: 500 }}>
       <Flex direction="column" gap="3">
         <Inset clip="padding-box" side="top" pb="current">
           {props.image && ( // Check if an image is provided
@@ -19,20 +19,23 @@ function Note(props) {
                 display: "block",
                 objectFit: "cover",
                 width: "100%",
-                height: 140,
+                height: "100%",
                 backgroundColor: "var(--gray-5)",
               }}
             />
           )}
         </Inset>
         <Text as="p" size="3">
-          <Strong>{props.date}</Strong> {props.content}
+          <Strong>{props.date}</Strong> <br></br>
+          {props.content}
         </Text>
-        <Flex gap="2">
+
+        {/* Version 2 should include multi select dropdown of tags */}
+        {/* <Flex gap="2">
           <Badge color="orange">tag orange</Badge>
           <Badge color="blue">tag blue</Badge>
           <Badge color="green">tag green</Badge>
-        </Flex>
+        </Flex> */}
 
         <button
           className="IconButton"

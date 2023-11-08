@@ -9,7 +9,7 @@
   body {
     background: #eee;
     background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
-    padding: 0 16px;
+
   }
   
   header {
@@ -19,9 +19,14 @@
   
   header h1 {
     color: #000000;
-    font-weight: 200;
+    font-weight: 400;
   }
   
+  header h2 {
+    color: #000000;
+    font-weight: 200;
+  }
+
   footer {
     position: absolute;
     text-align: center;
@@ -32,4 +37,5 @@
   
   footer p {
     color: #ccc;
+    cursor: pointer;
   }

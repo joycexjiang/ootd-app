@@ -24,32 +24,33 @@ function App() {
     });
   }
 
+  useState(() => {
+    console.log('Notes array:', notes);
+  }, [notes]);
+
   return (
     <div>
       
       <Theme>
 
       <Header />
-      <AddOOTD onAdd={addNote}/>
-      {/* <Grid columns="5" gap="0.1" width="100"> */}
-<div class ="note-grid">
-      {notes.map((noteItem, index) => {
-        return (
-          
-          <Note
-            key={index}
-            id={index}
-            title={noteItem.title}
-            content={noteItem.content}
-            image={noteItem.image}
-            date={noteItem.date}
-            onDelete={deleteNote}
-          />
-        );
-      })}
-
-</div>
       
+      <AddOOTD onAdd={addNote}/>
+      <div className ="note-grid">
+        {notes.map((noteItem, index) => {
+          return (
+            <Note
+              key={index}
+              id={index}
+              title={noteItem.title}
+              content={noteItem.content}
+              image={noteItem.image}
+              date={noteItem.date}
+              onDelete={deleteNote}
+            />
+          );
+        })}
+    </div>
       </Theme>
       <Footer />
     </div>
